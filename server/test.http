@@ -1,0 +1,21 @@
+### Criar uma notícia
+POST http://localhost:3000/api/news
+Content-Type: application/json
+
+{
+    "title": "Primeira Notícia",
+    "text": "Este é o conteúdo da terceira notícia.",
+    "autorId": 2
+}
+
+### Editar uma notícia (substitua o ID pelo correto)
+PUT http://localhost:3000/api/news/3
+Content-Type: application/json
+
+{
+    "title": "Noticia Três",
+    "text": "Noticia terceira atualizada."
+}
+
+### Excluir uma notícia (substitua o ID pelo correto)
+DELETE http://localhost:3000/api/news/1
