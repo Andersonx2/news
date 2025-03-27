@@ -23,7 +23,7 @@ const EditNews = ({ match, history }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:3000/api/news/${match.params.id}`, {
+            await axios.put(`http://localhost:3000/api/news/${match.params.id}`, {
                 title,
                 text,
                 autorId
@@ -33,8 +33,7 @@ const EditNews = ({ match, history }) => {
             console.error("Erro ao editar notícia", error);
         }
     };
-
-    return (
+        return (
         <form onSubmit={handleSubmit}>
             <h2>Editar Notícia</h2>
             <div>

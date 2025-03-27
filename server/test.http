@@ -18,4 +18,8 @@ Content-Type: application/json
 }
 
 ### Excluir uma notícia (substitua o ID pelo correto)
-DELETE http://localhost:3000/api/news/1
+DELETE http://localhost:3000/api/news/5
+
+### Excluir uma notícia (substitua o ID pelo correto)
+
+GET  http://localhost:3000/api/news

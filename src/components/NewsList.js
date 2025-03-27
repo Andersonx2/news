@@ -1,37 +1,31 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-const NewsList = ({ onEdit, onDelete }) => {
-    const [news, setNews] = useState([]);
-
-    useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                const response = await axios.get("http://localhost:3000/api/news");
-                setNews(response.data);
-            } catch (error) {
-                console.error("Erro ao buscar notícias", error);
-            }
-        };
-
-        fetchNews();
-    }, []);
-
+export default function NewsList({ news = [], onDelete }) {
+  if (!news.length) {
     return (
-        <div>
-            <h2>Lista de Notícias</h2>
-            <ul>
-                {news.map((item) => (
-                    <li key={item.id}>
-                        <h3>{item.title}</h3>
-                        <p>{item.text}</p>
-                        <button onClick={() => onEdit(item.id)}>Editar</button>
-                        <button onClick={() => onDelete(item.id)}>Excluir</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
+      <p className="text-center text-gray-500 mt-4">
+        Nenhuma notícia disponível.
+      </p>
+    ); 
+  }
 
-export default NewsList;
+  return (
+    <div className="space-y-4">
+      {news.map((item) => (
+        <div
+          key={item.id}
+          className="p-4 bg-white shadow rounded-lg flex justify-between items-center"
+        >
+          <div>
+            <h3 className="font-bold text-lg">{item.title}</h3>
+            <p className="text-gray-600">{item.text}</p>
+          </div>
+          <button
+            onClick={() => onDelete(item.id)}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+          >
+            Excluir
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}

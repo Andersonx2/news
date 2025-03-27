@@ -1,60 +1,94 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import LoadingButton from "./Button"
+import NewsList from "./NewsList";
 
-const CreateNews = ({ onNewsCreated }) => {
-    const [title, setTitle] = useState("");
-    const [text, setText] = useState("");
-    const [autorId, setAutorId] = useState("");
+export default function CreateNews() {
+  const [news, setNews] = useState([]);
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [autorId, setAutorId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:3000/api/news", {
-                title,
-                text,
-                autorId
-            });
-            onNewsCreated(response.data);
-            setTitle("");
-            setText("");
-            setAutorId("");
-        } catch (error) {
-            console.error("Erro ao criar notícia", error);
-        }
-    };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h2>Criar Notícia</h2>
-            <div>
-                <label>Título</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Texto</label>
-                <textarea
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    required
-                ></textarea>
-            </div>
-            <div>
-                <label>Autor ID</label>
-                <input
-                    type="number"
-                    value={autorId}
-                    onChange={(e) => setAutorId(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit">Criar</button>
-        </form>
-    );
-};
+  useEffect(() => {
+    fetchNews();
+  }, []);
 
-export default CreateNews;
+  const fetchNews = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/news");
+      setNews(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar notícias:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axios.post("http://localhost:3000/api/news", {
+        title,
+        text,
+        autorId,
+      });
+      // Atualiza a lista sem recarregar
+      setNews((prevNews) => [response.data, ...prevNews]);
+      setTitle("");
+      setText("");
+      setAutorId("");
+    } catch (error) {
+      console.error("Erro ao criar notícia:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/news/${id}`);
+      setNews(news.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Erro ao excluir notícia:", error);
+    }
+  };
+
+  return (
+    <div className="max-w-lg mx-auto p-6 bg-gray-100 shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Crie aqui sua Notícia
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          placeholder="Título"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+        <textarea
+          placeholder="Digite seu Texto"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          required
+          className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="number"
+          placeholder="Autor ID"
+          value={autorId}
+          onChange={(e) => setAutorId(e.target.value)}
+          required
+          className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+        />
+        <LoadingButton onClick={handleSubmit} isLoading={isLoading}>
+          Criar Notícia
+        </LoadingButton>
+      </form>
+
+      <h3 className="text-xl font-semibold mt-6 text-center mb-12">Lista de Notícias</h3>
+      <NewsList news={news} onDelete={handleDelete} />
+    </div>
+  );
+}

@@ -17,6 +17,33 @@ exports.createNews = async (req, res) => {
     }
 };
 
+
+
+exports.listNews = async (req, res) => {
+    try {
+        const news = await News.findAll();
+        res.json(news);
+    } catch (error) {
+        console.error("Erro ao listar notícias:", error);
+        res.status(500).json({ error: "Erro ao listar notícias.", detalhes: error.message });
+    }
+};
+
+
+exports.autorId = async (req, res) => {
+    try {
+        const news = await News.findAll();
+        res.json(news);
+    } catch (error) {
+        console.error("Erro ao listar notícias:", error);
+        res.status(500).json({ error: "Erro ao listar notícias.", detalhes: error.message });
+    }
+};
+
+
+
+
+
 exports.editNews = async (req, res) => {
     try {
         const { id } = req.params;
