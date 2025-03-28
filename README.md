@@ -14,57 +14,35 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Desenvolvimento deverá ocorrer preferencialmente em React. Após finalizar o desenvolvimento subir no github o código fonte e o Readme com as orientações.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Você deverá criar uma tela de notícias para realização de cadastro de notícias, pesquisa de notícias e visualização de notícias.
+No cadastro de notícias o usuário poderá informar os seguintes dados:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+· Título da notícia (obrigatório);
+· Texto da notícia (ilimitado e obrigatório);
+· Autor (chave estrangeira para a tabela Autor e é obrigatório)
 
-### `npm run eject`
+Também devem existir a opção de editar e excluir
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Na pesquisa de notícias o usuário poderá pesquisar pelas notícias cadastradas.- 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Você deverá criar um layout e implementar o mesmo demonstrando as funcionalidades integrados com backend usando Node.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+(X)Mudar o campo para texto
+(x)Criar um alert para editar a noticia. 
 
-## Learn More
+Criar a pesquisa por titulo/autor 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Ajustar o layout 
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+import React from "react";
+import NewsForm from "../app/CreateNews";
+import NewsList from "../app/NewsList";

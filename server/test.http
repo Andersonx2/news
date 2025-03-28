@@ -4,21 +4,23 @@ Content-Type: application/json
 
 {
     "title": "Primeira Notícia",
-    "text": "Este é o conteúdo da terceira notícia.",
-    "autorId": 2
-}
+    "text": "Este é o conteúdo da qas notícia.",
+    "autorId": 2,
+    "nome": "graca"
+    }
 
 ### Editar uma notícia (substitua o ID pelo correto)
-PUT http://localhost:3000/api/news/3
+PUT http://localhost:3000/api/news/54
 Content-Type: application/json
 
 {
     "title": "Noticia Três",
-    "text": "Noticia terceira atualizada."
+    "text": "Noticia asd atualizada.",
+    "nome": "caraca"
 }
 
 ### Excluir uma notícia (substitua o ID pelo correto)
-DELETE http://localhost:3000/api/news/5
+DELETE http://localhost:3000/api/news/40
 
 ### Excluir uma notícia (substitua o ID pelo correto)
 

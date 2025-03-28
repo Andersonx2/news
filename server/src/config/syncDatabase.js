@@ -1,6 +1,6 @@
 const sequelize = require("./database");
 const Autor = require("../models/Autor");
-const news = require("../models/News");
+const News = require("../models/News");
 
 const syncDatabase = async () => {
     try {

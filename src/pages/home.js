@@ -1,12 +1,21 @@
 import React from "react";
-import NewsForm from "../components/CreateNews";
-import NewsList from "../components/NewsList";
+import NewsList from "../app/NewsList";
+import NewsForm from "../app/CreateNews";
 
-function Home() {
+function Home({ news, setNews, onDelete }) {
   return (
-    <div className="mt-">
-      <NewsForm />
-      <NewsList />
+    <div> 
+      <NewsForm 
+      
+      setNews={setNews} 
+      
+      />
+      
+      <NewsList 
+        news={news} 
+        setNews={setNews} 
+        onDelete={onDelete} 
+      />
     </div>
   );
 }

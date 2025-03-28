@@ -1,28 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import LoadingButton from "./Button"
-import NewsList from "./NewsList";
+import LoadingButton from "../components/Button";
 
-export default function CreateNews() {
-  const [news, setNews] = useState([]);
+export default function CreateNews({ setNews }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [autorId, setAutorId] = useState("");
+  const [nome, setNome] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  const fetchNews = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/api/news");
-      setNews(response.data);
-    } catch (error) {
-      console.error("Erro ao carregar notícias:", error);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,26 +15,16 @@ export default function CreateNews() {
       const response = await axios.post("http://localhost:3000/api/news", {
         title,
         text,
-        autorId,
+        nome,
       });
-      // Atualiza a lista sem recarregar
-      setNews((prevNews) => [response.data, ...prevNews]);
+      setNews((prevNews) => [response.data, ...prevNews]); // Atualiza a lista com a nova notícia
       setTitle("");
       setText("");
-      setAutorId("");
+      setNome("");
     } catch (error) {
       console.error("Erro ao criar notícia:", error);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3000/api/news/${id}`);
-      setNews(news.filter((item) => item.id !== id));
-    } catch (error) {
-      console.error("Erro ao excluir notícia:", error);
     }
   };
 
@@ -75,10 +49,10 @@ export default function CreateNews() {
           className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         />
         <input
-          type="number"
-          placeholder="Autor ID"
-          value={autorId}
-          onChange={(e) => setAutorId(e.target.value)}
+          type="text"
+          placeholder="Nome do autor"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
           required
           className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         />
@@ -86,9 +60,6 @@ export default function CreateNews() {
           Criar Notícia
         </LoadingButton>
       </form>
-
-      <h3 className="text-xl font-semibold mt-6 text-center mb-12">Lista de Notícias</h3>
-      <NewsList news={news} onDelete={handleDelete} />
     </div>
   );
 }
