@@ -32,13 +32,14 @@ git clone https://github.com/andersonx2/news.git
 # Acesse a pasta do projeto
 cd news
 
+# Instale as dependências do frontend
+npm install
+
 # Instale as dependências do backend
 cd server
 npm install
 
-# Instale as dependências do frontend
-cd ../news
-npm install
+
 ```
 
 ## Como Executar
@@ -55,7 +56,7 @@ node src/server.js
 ### Iniciar Frontend
 
 ```sh
-cd frontend
+cd news
 npm start
 ```
 
