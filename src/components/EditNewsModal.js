@@ -16,24 +16,16 @@ const EditNewsModal = ({ newsItem, isOpen, onClose, onUpdate }) => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Enviando atualização para a notícia:", newsItem.id);
-  
+    e.preventDefault();  
     try {
       const response = await axios.put(`http://localhost:3000/api/news/${newsItem.id}`, {
         title,
         text,
         nome,
       });
-      console.log("Resposta do backend:", response.data);
       
-      // Atualiza a lista de notícias no componente pai com os dados retornados
       onUpdate(response.data);
-      console.log("Atualização enviada para o componente pai.");
-      
-      // Fecha o modal após a atualização
       onClose();
-      console.log("Modal fechado após a atualização.");
     } catch (error) {
       console.error("Erro ao editar notícia:", error);
     }

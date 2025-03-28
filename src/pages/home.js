@@ -1,7 +1,6 @@
 import React from "react";
 import NewsList from "../app/NewsList";
 import NewsForm from "../app/CreateNews";
-
 function Home({ news, setNews, onDelete }) {
   return (
     <div> 
@@ -10,7 +9,8 @@ function Home({ news, setNews, onDelete }) {
       setNews={setNews} 
       
       />
-      
+
+
       <NewsList 
         news={news} 
         setNews={setNews} 

@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EditNewsModal from "../components/EditNewsModal";
 import axios from "axios";
 
-export default function NewsList({ news = [], onDelete, setNews }) { 
-
+export default function NewsList({ news = [], onDelete, setNews }) {
   const [selectedNews, setSelectedNews] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredNews, setFilteredNews] = useState(news);
+
+  useEffect(() => {
+    const filtered = news.filter((item) => {
+      const titleMatch = item.title
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const authorMatch = item.autor
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      return titleMatch || authorMatch;
+    });
+    setFilteredNews(filtered);
+  }, [searchTerm, news]);
 
   const handleEditClick = (newsItem) => {
     setSelectedNews(newsItem);
@@ -13,26 +27,18 @@ export default function NewsList({ news = [], onDelete, setNews }) {
     console.log("Modal aberto para a notícia:", newsItem.id);
   };
 
-
-
   const handleUpdateNews = async (updatedNews) => {
     try {
       const response = await axios.get("http://localhost:3000/api/news");
       console.log("Estado atualizado:", response.data);
-      
-      // Atualiza a lista no estado global
       setNews(response.data);
-
-      // Fecha o modal após 1 segundo
       setTimeout(() => {
         handleCloseModal();
       }, 1000);
-      
     } catch (error) {
       console.error("Erro ao buscar notícias atualizadas:", error);
     }
   };
-  
 
   const handleCloseModal = () => {
     console.log("Fechando modal.");
@@ -40,16 +46,22 @@ export default function NewsList({ news = [], onDelete, setNews }) {
     setSelectedNews(null);
   };
 
-
-
   return (
     <div className="space-y-4">
-      {news.length === 0 ? (
-        <p className="text-center text-gray-500 mt-4">
-          Nenhuma notícia disponível.
-        </p>
+      <div className="flex space-x-2">
+        <input
+          type="text"
+          placeholder="Busca"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="p-2 border rounded"
+        />
+      </div>
+
+      {filteredNews.length === 0 ? (
+        <p className="text-center text-gray-500 mt-4">Nenhuma notícia encontrada.</p>
       ) : (
-        news.map((item) => (
+        filteredNews.map((item) => (
           <div
             key={item.id}
             className="p-4 bg-white shadow rounded-lg flex justify-between items-center"
@@ -61,7 +73,6 @@ export default function NewsList({ news = [], onDelete, setNews }) {
             </div>
             <div className="flex space-x-2">
               <button
-
                 onClick={() => onDelete(item.id)}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
               >

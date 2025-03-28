@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import LoadingButton from "../components/Button";
 
@@ -7,6 +7,7 @@ export default function CreateNews({ setNews }) {
   const [text, setText] = useState("");
   const [nome, setNome] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ export default function CreateNews({ setNews }) {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-100 shadow-lg rounded-xl">
+    <div className="max-w-lg mx-auto p-6 bg-gray-100 shadow-lg rounded-xl mt-10">
       <h2 className="text-2xl font-bold mb-4 text-center">
         Crie aqui sua Notícia
       </h2>
@@ -60,6 +61,9 @@ export default function CreateNews({ setNews }) {
           Criar Notícia
         </LoadingButton>
       </form>
+
+
+
     </div>
   );
 }
