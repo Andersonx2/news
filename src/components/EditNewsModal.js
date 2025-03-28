@@ -34,7 +34,7 @@ const EditNewsModal = ({ newsItem, isOpen, onClose, onUpdate }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50  z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-96">
         <h2 className="text-xl font-semibold mb-4">Editar Notícia</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -18,7 +18,7 @@ function SearchNews({ news, onSearchResults }) {
   };
 
   return (
-    <div className="search-container mt-28 ml-48 mr-96">
+    <div className="w-48 h-12 bg-red-200 rounded-[114px]">
       <input
         type="text"
         placeholder="Busca"

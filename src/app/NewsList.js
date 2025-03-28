@@ -47,8 +47,8 @@ export default function NewsList({ news = [], onDelete, setNews }) {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex space-x-2">
+    <div className="space-y-4  max-w-lg mx-auto p-6 bg-gray-100 shadow-lg rounded-xl  max-w-lg ">
+      <div className="flex space-x-2 ">
         <input
           type="text"
           placeholder="Busca"
@@ -58,13 +58,13 @@ export default function NewsList({ news = [], onDelete, setNews }) {
         />
       </div>
 
-      {filteredNews.length === 0 ? (
-        <p className="text-center text-gray-500 mt-4">Nenhuma notícia encontrada.</p>
+      {filteredNews.length === 0 ? ( 
+        <p className="text-center text-gray-500 mt-5  " >Nenhuma notícia encontrada.</p>
       ) : (
         filteredNews.map((item) => (
           <div
             key={item.id}
-            className="p-4 bg-white shadow rounded-lg flex justify-between items-center"
+            className="p-4 bg-white shadow rounded-lg flex justify-between items-center "
           >
             <div>
               <h3 className="font-bold text-lg">{item.title}</h3>

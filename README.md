@@ -1,48 +1,95 @@
-# Getting Started with Create React App
+# Projeto de Sistema de Notícias
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é um sistema de notícias desenvolvido com **React** no frontend e **Node.js** no backend.
 
-## Available Scripts
+## Requisitos do Sistema
 
-In the project directory, you can run:
+### Funcionalidades
+- **Cadastro de Notícias**
+  - Título da notícia (obrigatório)
+  - Texto da notícia (ilimitado e obrigatório)
+  - Autor (obrigatório, chave estrangeira para a tabela Autor)
+- **Edição e Exclusão de Notícias**
+- **Pesquisa de Notícias** por título e autor
+- **Visualização de Notícias**
 
-### `npm start`
+### Tecnologias Utilizadas
+- **Frontend:** React, Axios, React Router
+- **Backend:** Node.js, Express, SQLite
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Instalação
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Antes de iniciar, certifique-se de ter instalado:
+- [Node.js](https://nodejs.org/) (versão recomendada: 16+)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 
+Clone este repositório e instale as dependências:
 
+```sh
+# Clone o repositório
+git clone https://github.com/andersonx2/news.git
 
+# Acesse a pasta do projeto
+cd news
 
-1. Desenvolvimento deverá ocorrer preferencialmente em React. Após finalizar o desenvolvimento subir no github o código fonte e o Readme com as orientações.
+# Instale as dependências do backend
+cd server
+npm install
 
-Você deverá criar uma tela de notícias para realização de cadastro de notícias, pesquisa de notícias e visualização de notícias.
-No cadastro de notícias o usuário poderá informar os seguintes dados:
+# Instale as dependências do frontend
+cd ../news
+npm install
+```
 
-· Título da notícia (obrigatório);
-· Texto da notícia (ilimitado e obrigatório);
-· Autor (chave estrangeira para a tabela Autor e é obrigatório)
+## Como Executar
 
-Também devem existir a opção de editar e excluir
+Para iniciar o **backend** e o **frontend** utilize:
 
-Na pesquisa de notícias o usuário poderá pesquisar pelas notícias cadastradas.- 
+### Iniciar Backend
 
-Você deverá criar um layout e implementar o mesmo demonstrando as funcionalidades integrados com backend usando Node.
+```sh
+cd backend
+node src/server.js
+```
 
+### Iniciar Frontend
 
-(X)Mudar o campo para texto
-(x)Criar um alert para editar a noticia. 
+```sh
+cd frontend
+npm start
+```
 
-Criar a pesquisa por titulo/autor 
+## Estrutura do Projeto
 
+```
+/seu-repositorio
+├── backend
+│   ├── src
+│   │   ├── server.js   # Arquivo principal do servidor
+│   │   ├── routes/     # Rotas da API
+│   │   ├── controllers/ # Lógica dos controladores
+│   │   ├── models/     # Modelos do banco de dados
+│   ├── package.json
+│   └── ...
+├── frontend
+│   ├── src
+│   │   ├── components/ # Componentes React
+│   │   ├── pages/      # Páginas do sistema
+│   ├── package.json
+│   └── ...
+├── package.json (script para rodar tudo)
+└── README.md
+```
 
-Ajustar o layout 
+## Layout e Implementação
 
+A interface do sistema inclui:
+- **Tela de Cadastro de Notícias** com campos para título, texto e autor
+- **Tela de Pesquisa de Notícias** com filtro por título e autor
+- **Tela de Visualização de Notícias** para exibição detalhada
+- **Opção para Editar e Excluir Notícias**
 
+## Licença
 
-import React from "react";
-import NewsForm from "../app/CreateNews";
-import NewsList from "../app/NewsList";
+Este projeto está sob a licença MIT.
+

@@ -26,7 +26,7 @@ function App() {
       console.error("Erro ao deletar notícia:", error);
     }
   };
-
+  
   return <Home news={news} setNews={setNews} onDelete={handleDelete} />;
 }
 
